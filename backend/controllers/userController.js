@@ -1,19 +1,19 @@
 const { PrismaClient } = require('../generated/prisma');
-const asyncHandler = require('async-handler');
+const asyncHandler = require('express-async-handler');
 
 const prisma = new PrismaClient();
 
-const getUser = asyncHandler(async (req, res) => {
+const getUserInfo = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
       id: 1,
     },
   });
-
-  res.json({ user });
+  console.log(user);
+  res.json({ data: user });
 });
 
-const updateUser = asyncHandler(async (req, res) => {
+const updateUserInfo = asyncHandler(async (req, res) => {
   const newName = req.body.username;
   const updateUser = await prisma.user.update({
     where: {
@@ -24,7 +24,7 @@ const updateUser = asyncHandler(async (req, res) => {
     },
   });
 
-  res.json({ updateUser });
+  res.json({ data: updateUser });
 });
 
-module.exports = { getUser, updateUser };
+module.exports = { getUserInfo, updateUserInfo };
