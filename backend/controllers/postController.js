@@ -9,7 +9,7 @@ const getAllPosts = asyncHandler(async (req, res) => {
 });
 
 const getPost = asyncHandler(async (req, res) => {
-  const postId = req.params.postId;
+  const postId = Number(req.params.postId);
   const post = await prisma.post.findUnique({
     where: {
       id: postId,
@@ -23,6 +23,7 @@ const createPost = asyncHandler(async (req, res) => {
     data: {
       title: req.body.title,
       content: req.body.content,
+      authorId: 1,
     },
   });
 
@@ -30,9 +31,10 @@ const createPost = asyncHandler(async (req, res) => {
 });
 
 const updatePost = asyncHandler(async (req, res) => {
+  const postId = Number(req.params.postId);
   const updatedPost = await prisma.post.update({
     where: {
-      id: req.params.postId,
+      id: postId,
     },
     data: {
       title: req.body.title,
@@ -43,9 +45,10 @@ const updatePost = asyncHandler(async (req, res) => {
 });
 
 const deletePost = asyncHandler(async (req, res) => {
+  const postId = Number(req.params.postId);
   const deletedPost = await prisma.post.delete({
     where: {
-      id: req.params.postId,
+      id: postId,
     },
   });
   res.json({ message: 'Post deleted', data: deletedPost });
