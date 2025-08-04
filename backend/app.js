@@ -3,6 +3,7 @@ const indexRouter = require('./routes/indexRoute');
 const userRouter = require('./routes/userRouter');
 const errorMiddleware = require('./middlewares/errorHandler');
 const postRouter = require('./routes/postRouter');
+const commentRouter = require('./routes/commentRouter');
 require('dotenv').config();
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/posts', postRouter);
+app.use('/posts', commentRouter);
 
 // Error Middleware
 app.use(errorMiddleware);
