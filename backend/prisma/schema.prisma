@@ -34,8 +34,10 @@ model Post {
 }
 
 model Comment {
+  id        Int      @id @default(autoincrement())
   email     String   @unique
   timestamp DateTime @default(now())
+  content   String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int      
 }
