@@ -23,7 +23,7 @@ const createPost = asyncHandler(async (req, res) => {
     data: {
       title: req.body.title,
       content: req.body.content,
-      authorId: 1,
+      authorId: 2,
     },
   });
 
