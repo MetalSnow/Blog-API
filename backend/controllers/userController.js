@@ -1,6 +1,8 @@
 const { PrismaClient } = require('../generated/prisma');
 const asyncHandler = require('express-async-handler');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const prisma = new PrismaClient();
 
@@ -43,4 +45,17 @@ const signupUser = asyncHandler(async (req, res) => {
   res.json({ data: user });
 });
 
-module.exports = { getUserInfo, updateUserInfo, signupUser };
+const createJWT = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  jwt.sign(
+    { userId },
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' },
+    (err, token) => {
+      if (err) throw new Error(err);
+      res.json({ token });
+    }
+  );
+});
+
+module.exports = { getUserInfo, updateUserInfo, signupUser, createJWT };

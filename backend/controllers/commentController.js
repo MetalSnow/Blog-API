@@ -24,22 +24,6 @@ const createComment = asyncHandler(async (req, res) => {
   res.json({ message: 'Comment created', data: comment });
 });
 
-const updateComment = asyncHandler(async (req, res) => {
-  const postId = Number(req.params.postId);
-  const commentId = Number(req.params.commentId);
-  const updatedComment = await prisma.comment.update({
-    where: {
-      id: commentId,
-      postId: postId,
-    },
-    data: {
-      email: req.body.email,
-      content: req.body.content,
-    },
-  });
-  res.json({ message: 'Comment Updated', data: updatedComment });
-});
-
 const deleteComment = asyncHandler(async (req, res) => {
   const postId = Number(req.params.postId);
   const commentId = Number(req.params.commentId);
@@ -55,6 +39,5 @@ const deleteComment = asyncHandler(async (req, res) => {
 module.exports = {
   getComments,
   createComment,
-  updateComment,
   deleteComment,
 };
