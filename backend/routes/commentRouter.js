@@ -2,14 +2,18 @@ const { Router } = require('express');
 const {
   getComments,
   createComment,
-  updateComment,
   deleteComment,
 } = require('../controllers/commentController');
+const passport = require('../config/passport');
+
 const commentRouter = Router();
 
 commentRouter.get('/:postId/comments', getComments);
 commentRouter.post('/:postId/comments', createComment);
-commentRouter.patch('/:postId/comments/:commentId', updateComment);
-commentRouter.delete('/:postId/comments/:commentId', deleteComment);
+commentRouter.delete(
+  '/:postId/comments/:commentId',
+  passport.authenticate('jwt', { session: false }),
+  deleteComment
+);
 
 module.exports = commentRouter;
