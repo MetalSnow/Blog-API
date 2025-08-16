@@ -4,9 +4,12 @@ const userRouter = require('./routes/userRouter');
 const errorMiddleware = require('./middlewares/errorHandler');
 const postRouter = require('./routes/postRouter');
 const commentRouter = require('./routes/commentRouter');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
