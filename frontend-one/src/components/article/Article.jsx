@@ -1,15 +1,19 @@
-// import { useEffect, useState } from 'react';
+import useFetch from '../../hooks/useFetch';
 
 const Article = () => {
-  //   const { articles, setArticles } = useState([]);
+  const { data, loading, error } = useFetch('http://localhost:3000/posts');
 
-  //   useEffect(() => {
-  //     fetch('', { cors: true });
-  //   }, []);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>A network error was encountered</p>;
+
   return (
     <>
       <h2>Articles</h2>
-      <div className="article"></div>
+      <ul>
+        {data.map((el) => {
+          return <li key={el.id}>{el.title}</li>;
+        })}
+      </ul>
     </>
   );
 };
