@@ -1,5 +1,6 @@
 const { PrismaClient } = require('../generated/prisma');
 const asyncHandler = require('express-async-handler');
+const posts = require('../mock-data/faker.js');
 
 const prisma = new PrismaClient();
 
@@ -19,14 +20,16 @@ const getPost = asyncHandler(async (req, res) => {
 });
 
 const createPost = asyncHandler(async (req, res) => {
-  const createdPost = await prisma.post.create({
-    data: {
-      title: req.body.title,
-      content: req.body.content,
-      authorId: 2,
-    },
+  // const createdPost = await prisma.post.create({
+  //   data: {
+  //     title: req.body.title,
+  //     content: req.body.content,
+  //     authorId: 3,
+  //   },
+  // });
+  const createdPost = await prisma.post.createManyAndReturn({
+    data: posts,
   });
-
   res.json({ message: 'Post created', data: createdPost });
 });
 
