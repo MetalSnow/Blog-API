@@ -4,7 +4,11 @@ const asyncHandler = require('express-async-handler');
 const prisma = new PrismaClient();
 
 const getComments = asyncHandler(async (req, res) => {
+  const postId = Number(req.params.postId);
   const comments = await prisma.comment.findMany({
+    where: {
+      postId: postId,
+    },
     orderBy: {
       id: 'asc',
     },
