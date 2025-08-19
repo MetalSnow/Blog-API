@@ -8,9 +8,10 @@ const HomePage = () => {
       <div>
         <h2>Welcome to My Blog!</h2>
         <p>
-          Hey there! 👋 This is where I share my thoughts, stories, and ideas.
-          Whether it’s tech, life, or random musings, you’ll find a bit of
-          everything here.
+          Hey there! 👋 This is where I share my literary adventures and deep
+          dives. Whether it's Joyce's Dublin, Poe's macabre tales, or Dahl's
+          chocolate factory, you'll find passionate discussions of timeless
+          stories here.
         </p>
         <ul>
           <li>
