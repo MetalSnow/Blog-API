@@ -5,7 +5,7 @@ function createRandomPosts() {
     title: faker.book.title(),
     content: faker.lorem.paragraphs(10),
     published: true,
-    authorId: 3,
+    authorId: 1,
   };
 }
 
