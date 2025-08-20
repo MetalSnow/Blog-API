@@ -2,7 +2,7 @@ import Comments from '../comments/Comments';
 
 const Content = ({ data, id }) => {
   const article = data.filter((el) => el.id === Number(id))[0];
-  console.log(article);
+  const url = `http://localhost:3000/posts/${Number(id)}/comments`;
 
   return (
     <>
@@ -12,7 +12,7 @@ const Content = ({ data, id }) => {
         <p>{article.content}</p>
       </div>
       <div>
-        <Comments postId={Number(id)} />
+        <Comments url={url} />
       </div>
     </>
   );
