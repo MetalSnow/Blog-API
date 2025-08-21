@@ -7,7 +7,7 @@ const Content = ({ data, id }) => {
   return (
     <>
       <div>
-        s<h2>{article.title}</h2>
+        <h2>{article.title}</h2>
         <p>{article.createdAt}</p>
         <p>{article.content}</p>
       </div>

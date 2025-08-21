@@ -1,14 +1,16 @@
 import { Link } from 'react-router-dom';
 import { BookOpen, Newspaper, BookA } from 'lucide-react';
+import styles from './Header.module.css';
 
 const Header = () => {
   return (
-    <div>
+    <div className={styles.container}>
       <h1>
-        <BookOpen size={45} />
-        <Link to="/">My Blog</Link>
+        <Link to="/">
+          <BookOpen size={45} />
+          My Blog
+        </Link>
       </h1>
-
       <ul>
         <li>
           <Link to="/articles">
