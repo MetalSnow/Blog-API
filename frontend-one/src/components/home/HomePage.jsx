@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import Header from '../header/Header';
+import styles from './HomePage.module.css';
 
 const HomePage = () => {
   return (
     <>
       <Header />
-      <div>
+      <div className={styles.homeContainer}>
         <h2>Welcome to My Blog!</h2>
-        <p>
+        <p className={styles.intro}>
           Hey there! 👋 This is where I share my literary adventures and deep
           dives. Whether it's Joyce's Dublin, Poe's macabre tales, or Dahl's
           chocolate factory, you'll find passionate discussions of timeless
