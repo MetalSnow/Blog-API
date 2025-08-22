@@ -1,4 +1,5 @@
 import Comments from '../comments/Comments';
+import styles from './Article.module.css';
 
 const Content = ({ data, id }) => {
   const article = data.filter((el) => el.id === Number(id))[0];
@@ -6,14 +7,13 @@ const Content = ({ data, id }) => {
 
   return (
     <>
-      <div>
+      <div className={styles.content}>
         <h2>{article.title}</h2>
-        <p>{article.createdAt}</p>
+        <p className={styles.date}>{article.createdAt.split('T')[0]}</p>
         <p>{article.content}</p>
       </div>
-      <div>
-        <Comments url={url} />
-      </div>
+
+      <Comments url={url} />
     </>
   );
 };
