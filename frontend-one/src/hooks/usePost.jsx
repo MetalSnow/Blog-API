@@ -2,14 +2,12 @@ import { useState } from 'react';
 
 const usePost = (url) => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const action = async (postData) => {
     'use server';
     setError(null);
-
-    console.log(postData);
-    console.log(url);
+    setIsLoading(true);
     try {
       const response = await fetch(url, {
         method: 'POST',
