@@ -3,6 +3,9 @@ import useFetch from '../../hooks/useFetch';
 import Modal from '../Modal';
 import { useFormStatus } from 'react-dom';
 import usePost from '../../hooks/usePost';
+import { LoaderCircle } from 'lucide-react';
+import styles from './Comments.module.css';
+import Comment from './Comment';
 
 const Comments = ({ url }) => {
   const [modal, setModal] = useState(false);
@@ -28,36 +31,39 @@ const Comments = ({ url }) => {
     }
   };
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>A network error was encountred!</p>;
   return (
-    <div>
-      <button onClick={() => setModal(true)}>Share your thoughts</button>
-      <Modal openModal={modal} closeModal={handleClose}>
-        {isLoading && <p>Posting your comment...</p>}
-        {submitError && (
-          <p style={{ color: 'red' }}>Error: {submitError.message}</p>
-        )}
-        <form action={submitData}>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" />
-          <label htmlFor="comment">Comment:</label>
-          <input type="text" id="comment" name="content" />
-          <Submit />
-        </form>
-      </Modal>
-      <ul>
-        {data.map((comment) => {
-          return (
-            <li key={comment.id}>
-              <p>{comment.email}</p>
-              <p>{comment.timestamp}</p>
-              <p>{comment.content}</p>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <>
+      {loading ? (
+        <LoaderCircle size={30} strokeWidth={2.5} className={styles.loader} />
+      ) : (
+        <>
+          <button onClick={() => setModal(true)}>Share your thoughts</button>
+          <Modal openModal={modal} closeModal={handleClose}>
+            {isLoading && <p>Posting your comment...</p>}
+            {submitError && (
+              <p style={{ color: 'red' }}>Error: {submitError.message}</p>
+            )}
+            <form action={submitData}>
+              <label htmlFor="email">Email:</label>
+              <input type="email" id="email" name="email" />
+              <label htmlFor="comment">Comment:</label>
+              <input type="text" id="comment" name="content" />
+              <Submit />
+            </form>
+          </Modal>
+          <div className={styles.comments}>
+            <ul>
+              {data.map((comment) => (
+                <li key={comment.id}>
+                  <Comment comment={comment} styles={styles} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </>
+      )}
+    </>
   );
 };
 
