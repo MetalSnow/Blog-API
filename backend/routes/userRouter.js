@@ -5,7 +5,7 @@ const {
   signupUser,
   createJWT,
 } = require('../controllers/userController');
-const passport = require('../config/passport');
+const authenticateLogin = require('../middlewares/authenticateLogin');
 const userRouter = Router();
 
 userRouter.get('/', getUserInfo);
@@ -13,10 +13,6 @@ userRouter.patch('/update', updateUserInfo);
 
 //authentication
 userRouter.post('/sign-up', signupUser);
-userRouter.post(
-  '/log-in',
-  passport.authenticate('local', { session: false }),
-  createJWT
-);
+userRouter.post('/log-in', authenticateLogin, createJWT);
 
 module.exports = userRouter;
