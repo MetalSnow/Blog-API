@@ -20,7 +20,7 @@ passport.use(
         });
 
         if (!user) {
-          return done(null, false, { message: 'Incorrect Username' });
+          return done(null, false, { message: 'Incorrect Email' });
         }
 
         const isMatched = await bcrypt.compare(password, user.password);
