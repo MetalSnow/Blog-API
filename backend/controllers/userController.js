@@ -12,7 +12,6 @@ const getUserInfo = asyncHandler(async (req, res) => {
       id: 1,
     },
   });
-  console.log(user);
   res.json({ data: user });
 });
 

@@ -6,10 +6,19 @@ const {
   createJWT,
 } = require('../controllers/userController');
 const authenticateLogin = require('../middlewares/authenticateLogin');
+const passport = require('../config/passport');
 const userRouter = Router();
 
-userRouter.get('/', getUserInfo);
-userRouter.patch('/update', updateUserInfo);
+userRouter.get(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  getUserInfo
+);
+userRouter.patch(
+  '/update',
+  passport.authenticate('jwt', { session: false }),
+  updateUserInfo
+);
 
 //authentication
 userRouter.post('/sign-up', signupUser);
