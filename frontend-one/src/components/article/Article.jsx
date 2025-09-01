@@ -5,8 +5,10 @@ import styles from './Article.module.css';
 import Header from '../header/Header';
 import { LoaderCircle } from 'lucide-react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const Article = () => {
-  const { data, loading, error } = useFetch('http://localhost:3000/posts');
+  const { data, loading, error } = useFetch(`${API_BASE_URL}/posts`);
 
   const { id } = useParams();
 
