@@ -1,11 +1,13 @@
-import { useState } from 'react';
 import usePost from '../../hooks/usePost';
 import styles from './LoginPage.module.css';
+import { useNavigate } from 'react-router-dom';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const LoginPage = () => {
-  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
   const { authenticate, loading, error, validation } = usePost(
-    'http://localhost:3000/user/log-in'
+    `${API_BASE_URL}/user/log-in`
   );
 
   const loginUser = async (formData) => {
@@ -15,9 +17,10 @@ const LoginPage = () => {
     const data = { email, password };
     try {
       const jsonToken = await authenticate(data);
-      setToken(jsonToken);
-
-      localStorage.setItem('token', jsonToken);
+      if (jsonToken) {
+        localStorage.setItem('token', jsonToken);
+        navigate('/dashboard');
+      }
     } catch (error) {
       console.log(error.message);
     }
