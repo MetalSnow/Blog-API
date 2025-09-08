@@ -8,14 +8,23 @@ const useFetch = (url) => {
     async (token) => {
       setError(null);
       try {
-        const response = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        let response;
+        if (token) {
+          response = await fetch(url, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        } else {
+          response = await fetch(url);
+        }
+
+        if (response.status == 401) {
+          throw new Error('You are not allowed to view this resources.');
+        }
 
         if (response.status >= 400) {
-          throw new Error('server error!');
+          throw new Error('Server error occured!');
         }
 
         const resData = await response.json();

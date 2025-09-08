@@ -18,8 +18,6 @@ const usePost = (url) => {
         body: JSON.stringify(data),
       });
 
-      console.log(response);
-
       if (response.status === 500) {
         throw new Error(`HTTP error! status code:${response.status} `);
       }
