@@ -20,16 +20,16 @@ const getPost = asyncHandler(async (req, res) => {
 });
 
 const createPost = asyncHandler(async (req, res) => {
-  // const createdPost = await prisma.post.create({
-  //   data: {
-  //     title: req.body.title,
-  //     content: req.body.content,
-  //     authorId: 3,
-  //   },
-  // });
-  const createdPost = await prisma.post.createManyAndReturn({
-    data: posts,
+  const createdPost = await prisma.post.create({
+    data: {
+      title: req.body.title,
+      content: req.body.content,
+      authorId: 3,
+    },
   });
+  // const createdPost = await prisma.post.createManyAndReturn({
+  //   data: posts,
+  // });
   res.json({ message: 'Post created', data: createdPost });
 });
 
@@ -42,6 +42,7 @@ const updatePost = asyncHandler(async (req, res) => {
     data: {
       title: req.body.title,
       content: req.body.content,
+      published: req.body.published,
     },
   });
   res.json({ message: 'Post Updated', data: updatedPost });
