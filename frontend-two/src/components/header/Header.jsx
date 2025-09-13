@@ -22,7 +22,7 @@ const Header = ({ data }) => {
           <Link to="/dashboard">Posts</Link>
         </li>
         <li>
-          <Link to="/new-post">Create Post</Link>
+          <Link to="/dashboard/new-post">Create Post</Link>
         </li>
         <li>
           <CircleUser size={28} /> {data.username}

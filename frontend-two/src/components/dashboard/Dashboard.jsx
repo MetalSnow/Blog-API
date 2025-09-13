@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import Header from '../header/Header';
 import PublishedInput from './PublishedInput';
+import { useParams } from 'react-router-dom';
+import NewPost from '../newPost/NewPost';
 // import styles from './Dashboard.module.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -15,6 +17,8 @@ const Dashboard = () => {
     error: postError,
     fetchData: fetchPostData,
   } = useFetch(`${API_BASE_URL}/posts`);
+
+  const { name } = useParams();
 
   useEffect(() => {
     const getUserData = async () => {
@@ -47,17 +51,21 @@ const Dashboard = () => {
       {!loading && !postLoading ? (
         <>
           <Header data={userData} />
-          <div>
-            <h2>Posts</h2>
-            <ul>
-              {postData.map((post) => (
-                <li key={post.id}>
-                  <p>{post.title}</p>
-                  <PublishedInput post={post} url={API_BASE_URL} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          {name === 'new-post' ? (
+            <NewPost />
+          ) : (
+            <div>
+              <h2>Posts</h2>
+              <ul>
+                {postData.map((post) => (
+                  <li key={post.id}>
+                    <p>{post.title}</p>
+                    <PublishedInput post={post} url={API_BASE_URL} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </>
       ) : (
         <p>Loading...</p>

@@ -9,7 +9,7 @@ const routes = [
     errorElement: <ErrorPage />,
   },
   {
-    path: '/dashboard',
+    path: '/dashboard/:name?',
     element: <Dashboard />,
   },
 ];
