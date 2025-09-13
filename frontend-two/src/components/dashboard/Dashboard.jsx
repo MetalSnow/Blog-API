@@ -28,8 +28,6 @@ const Dashboard = () => {
           fetchData(token),
           fetchPostData(),
         ]);
-        console.log(userInfo);
-        console.log(posts);
 
         setUserData(userInfo);
         setPostData(posts);
@@ -42,9 +40,6 @@ const Dashboard = () => {
 
   if (error) return <p>{error.message}</p>;
   if (postError) return <p>{postError.message}</p>;
-  console.log('user loding', loading);
-  console.log('posts loding', postLoading);
-  console.log(userData);
 
   return (
     <>

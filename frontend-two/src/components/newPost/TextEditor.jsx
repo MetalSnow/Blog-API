@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-const EDITOR_API_KEY = import.meta.env.EDITOR_API_KEY;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 const TextEditor = () => {
   const editorRef = useRef(null);
@@ -10,10 +10,11 @@ const TextEditor = () => {
       console.log(editorRef.current.getContent());
     }
   };
+
   return (
     <>
       <Editor
-        apiKey={EDITOR_API_KEY}
+        apiKey={apiKey}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
         init={{
