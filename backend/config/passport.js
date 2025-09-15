@@ -45,7 +45,7 @@ opts.secretOrKey = process.env.JWT_SECRET;
 passport.use(
   new JwtStrategy(opts, async (data, done) => {
     try {
-      const user = prisma.user.findFirst({
+      const user = await prisma.user.findFirst({
         where: {
           id: data.id,
         },
@@ -57,7 +57,7 @@ passport.use(
         });
       }
 
-      done(null, user);
+      return done(null, user);
     } catch (err) {
       done(err);
     }

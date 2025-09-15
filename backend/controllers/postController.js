@@ -20,17 +20,18 @@ const getPost = asyncHandler(async (req, res) => {
 });
 
 const createPost = asyncHandler(async (req, res) => {
+  const userId = req.user.id;
   const createdPost = await prisma.post.create({
     data: {
       title: req.body.title,
       content: req.body.content,
-      authorId: 3,
+      authorId: userId,
     },
   });
-  // const createdPost = await prisma.post.createManyAndReturn({
-  //   data: posts,
-  // });
-  res.json({ message: 'Post created', data: createdPost });
+  res.json({
+    message: 'Post created successfully! View it',
+    data: createdPost,
+  });
 });
 
 const updatePost = asyncHandler(async (req, res) => {
