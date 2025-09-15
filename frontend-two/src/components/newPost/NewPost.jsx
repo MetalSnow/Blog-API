@@ -1,14 +1,24 @@
 import { useRef, useState } from 'react';
 import TextEditor from './TextEditor';
+import usePost from '../../hooks/usePost';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const NewPost = () => {
   const editorRef = useRef(null);
+  const [successMsg, setSuccessMsg] = useState(null);
   const [editorError, setEditorError] = useState(null);
+  const {
+    authenticate: upload,
+    loading,
+    error,
+  } = usePost(`${API_BASE_URL}/posts`);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
     setEditorError(null);
+
+    const token = localStorage.getItem('token');
 
     const form = event.target;
     const formData = new FormData(form);
@@ -36,11 +46,19 @@ const NewPost = () => {
     }
 
     const formJson = Object.fromEntries(formData.entries());
-    console.log(formJson);
+    try {
+      const response = await upload(formJson, token);
+      setSuccessMsg(response.message);
+      console.log(response.message);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <>
+      {error ? <p>{error.message}</p> : loading && <p>Uploading...</p>}
+      {successMsg && <p>{successMsg} here.</p>}
       <form method="post" onSubmit={handleSubmit}>
         <input type="text" name="title" id="title" placeholder="Post Title" />
         {editorError && <div>{editorError}</div>}

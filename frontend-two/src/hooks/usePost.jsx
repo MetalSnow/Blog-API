@@ -5,18 +5,34 @@ const usePost = (url) => {
   const [error, setError] = useState(null);
   const [validation, setValidation] = useState(null);
 
-  const authenticate = async (data) => {
+  const authenticate = async (data, token) => {
     setError(null);
     setValidation(null);
     setLoding(true);
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+      console.log(data);
+      console.log(token);
+      let response;
+      if (token) {
+        response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(data),
+        });
+      } else {
+        response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+      }
+
+      console.log(response);
 
       if (response.status === 500) {
         throw new Error(`HTTP error! status code:${response.status} `);
@@ -31,7 +47,10 @@ const usePost = (url) => {
 
       const result = await response.json();
       setLoding(false);
-      return result.token;
+      if (result.token) {
+        return result.token;
+      }
+      return result;
     } catch (err) {
       setError(err);
     }
