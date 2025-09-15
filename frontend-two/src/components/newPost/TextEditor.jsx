@@ -1,45 +1,17 @@
-import { useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 const apiKey = import.meta.env.VITE_API_KEY;
 
-const TextEditor = () => {
-  const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
-
+const TextEditor = ({ editorRef }) => {
   return (
     <>
       <Editor
         apiKey={apiKey}
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
         init={{
+          placeholder: 'Describe your masterpiece...',
           height: 500,
           menubar: false,
-          plugins: [
-            'advlist',
-            'autolink',
-            'lists',
-            'link',
-            'image',
-            'charmap',
-            'preview',
-            'anchor',
-            'searchreplace',
-            'visualblocks',
-            'code',
-            'fullscreen',
-            'insertdatetime',
-            'media',
-            'table',
-            'code',
-            'help',
-            'wordcount',
-          ],
           toolbar:
             'undo redo | blocks | ' +
             'bold italic forecolor | alignleft aligncenter ' +
@@ -49,7 +21,6 @@ const TextEditor = () => {
             'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         }}
       />
-      <button onClick={log}>Log editor content</button>
     </>
   );
 };
