@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import Header from '../header/Header';
 import PublishedInput from './PublishedInput';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NewPost from '../newPost/NewPost';
+import { isTokenExpired } from '../../utils/tokenUtils';
 // import styles from './Dashboard.module.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -17,12 +18,18 @@ const Dashboard = () => {
     error: postError,
     fetchData: fetchPostData,
   } = useFetch(`${API_BASE_URL}/posts`);
-
+  const navigate = useNavigate();
   const { name } = useParams();
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (isTokenExpired(token)) {
+      localStorage.removeItem('token');
+      navigate('/');
+      return;
+    }
+
     const getUserData = async () => {
-      const token = localStorage.getItem('token');
       try {
         const [userInfo, posts] = await Promise.all([
           fetchData(token),
