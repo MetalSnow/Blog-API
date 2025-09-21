@@ -5,7 +5,7 @@ const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(
-    async (token) => {
+    async (token, id) => {
       setError(null);
       try {
         let response;
@@ -15,8 +15,10 @@ const useFetch = (url) => {
               Authorization: `Bearer ${token}`,
             },
           });
+        } else if (id) {
+          response = await fetch(`${url}/${id}`);
         } else {
-          response = await fetch(url);
+          response = await fetch(`${url}`);
         }
 
         if (response.status == 401) {

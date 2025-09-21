@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useFetch from '../../hooks/useFetch';
 import Header from '../header/Header';
 import PublishedInput from './PublishedInput';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import NewPost from '../newPost/NewPost';
 import { isTokenExpired } from '../../utils/tokenUtils';
 // import styles from './Dashboard.module.css';
@@ -43,7 +43,7 @@ const Dashboard = () => {
       }
     };
     getUserData();
-  }, [fetchData, fetchPostData]);
+  }, [fetchData, fetchPostData, navigate]);
 
   if (error) return <p>{error.message}</p>;
   if (postError) return <p>{postError.message}</p>;
@@ -61,7 +61,7 @@ const Dashboard = () => {
               <ul>
                 {postData.map((post) => (
                   <li key={post.id}>
-                    <p>{post.title}</p>
+                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
                     <PublishedInput post={post} url={API_BASE_URL} />
                   </li>
                 ))}

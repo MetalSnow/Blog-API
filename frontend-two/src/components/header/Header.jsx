@@ -25,7 +25,8 @@ const Header = ({ data }) => {
           <Link to="/dashboard/new-post">Create Post</Link>
         </li>
         <li>
-          <CircleUser size={28} /> {data.username}
+          <CircleUser size={28} />{' '}
+          {data?.username ? data.username : 'MetalSnow'}
         </li>
         <li>
           <button onClick={handleLogOut}>

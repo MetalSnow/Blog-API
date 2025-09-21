@@ -10,8 +10,6 @@ const usePost = (url) => {
     setValidation(null);
     setLoding(true);
     try {
-      console.log(data);
-      console.log(token);
       let response;
       if (token) {
         response = await fetch(url, {
@@ -31,8 +29,6 @@ const usePost = (url) => {
           body: JSON.stringify(data),
         });
       }
-
-      console.log(response);
 
       if (response.status === 500) {
         throw new Error(`HTTP error! status code:${response.status} `);
