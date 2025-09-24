@@ -1,4 +1,4 @@
-// import Comments from '../comments/Comments';
+import Comments from '../comments/Comments';
 import styles from './Post.module.css';
 import DOMPurify from 'dompurify';
 
@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Content = ({ data, id }) => {
   const article = data.filter((el) => el.id === Number(id))[0];
-  // const url = `${API_BASE_URL}/posts/${Number(id)}/comments`;
+  const url = `${API_BASE_URL}/posts/${id}/comments`;
 
   return (
     <>
@@ -20,7 +20,7 @@ const Content = ({ data, id }) => {
         ></div>
       </div>
 
-      {/* <Comments url={url} /> */}
+      <Comments url={url} />
     </>
   );
 };

@@ -18,7 +18,7 @@ const useFetch = (url) => {
         } else if (id) {
           response = await fetch(`${url}/${id}`);
         } else {
-          response = await fetch(`${url}`);
+          response = await fetch(url);
         }
 
         if (response.status == 401) {
@@ -30,6 +30,7 @@ const useFetch = (url) => {
         }
 
         const resData = await response.json();
+        console.log(resData);
 
         setLoading(false);
         return resData.data;
