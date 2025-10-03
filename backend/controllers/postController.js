@@ -5,7 +5,11 @@ const posts = require('../mock-data/faker.js');
 const prisma = new PrismaClient();
 
 const getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await prisma.post.findMany();
+  const posts = await prisma.post.findMany({
+    orderBy: {
+      id: 'asc',
+    },
+  });
   res.json({ data: posts });
 });
 
