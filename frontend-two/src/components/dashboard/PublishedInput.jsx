@@ -4,7 +4,7 @@ import usePatch from '../../hooks/usePatch';
 import { Loader2Icon } from 'lucide-react';
 
 const PublishedInput = ({ post, url }) => {
-  const [isPublished, setIsPublished] = useState(false);
+  const [isPublished, setIsPublished] = useState(post.published);
   const { update, loading, error } = usePatch(`${url}/posts/${post.id}`);
 
   const handleChange = async (event) => {
@@ -30,6 +30,7 @@ const PublishedInput = ({ post, url }) => {
         name={`publish-${post.id}`}
         id={`publish-${post.id}`}
         onChange={handleChange}
+        checked={isPublished}
       />
       <span className={styles.slider}></span>
       {loading ? <Loader2Icon /> : isPublished ? 'Unpublish' : 'Publish'}

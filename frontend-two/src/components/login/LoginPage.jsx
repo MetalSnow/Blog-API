@@ -34,9 +34,21 @@ const LoginPage = () => {
       {validation && <p style={{ color: 'red' }}>{validation}</p>}
       <form action={loginUser}>
         <label htmlFor="email">Email:</label>
-        <input type="email" name="email" id="email" required />
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email Address"
+          required
+        />
         <label htmlFor="password">Password:</label>
-        <input type="password" name="password" id="password" required />
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter password"
+          required
+        />
         <button type="submit">Login</button>
       </form>
     </div>

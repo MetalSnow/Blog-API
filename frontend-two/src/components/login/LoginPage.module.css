@@ -1,2 +1,19 @@
 .login {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  & form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    & input {
+      padding: 4px 8px;
+      width: 40%;
+      min-width: 200px;
+    }
+  }
 }
