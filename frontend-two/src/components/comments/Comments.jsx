@@ -7,10 +7,10 @@ import { LoaderCircle } from 'lucide-react';
 import styles from './Comments.module.css';
 import Comment from './Comment';
 
-const Comments = ({ url }) => {
+const Comments = ({ url, postId }) => {
   const [modal, setModal] = useState(false);
   const { loading, error, fetchData } = useFetch(url);
-  const { action, isLoading, error: submitError } = usePost(url);
+  const { authenticate: action, isLoading, error: submitError } = usePost(url);
   const [data, setData] = useState(null);
 
   const handleClose = () => {
@@ -45,8 +45,6 @@ const Comments = ({ url }) => {
     }
   };
 
-  console.log(data);
-
   if (error) return <p>A network error was encountred!</p>;
   return (
     <>
@@ -72,7 +70,13 @@ const Comments = ({ url }) => {
             <ul>
               {data.map((comment) => (
                 <li key={comment.id}>
-                  <Comment comment={comment} styles={styles} />
+                  <Comment
+                    comment={comment}
+                    styles={styles}
+                    postId={postId}
+                    setData={setData}
+                    fetchData={fetchData}
+                  />
                 </li>
               ))}
             </ul>

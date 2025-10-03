@@ -30,7 +30,6 @@ const useFetch = (url) => {
         }
 
         const resData = await response.json();
-        console.log(resData);
 
         setLoading(false);
         return resData.data;

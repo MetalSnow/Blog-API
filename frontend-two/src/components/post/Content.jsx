@@ -20,7 +20,7 @@ const Content = ({ data, id }) => {
         ></div>
       </div>
 
-      <Comments url={url} />
+      <Comments url={url} postId={id} />
     </>
   );
 };
