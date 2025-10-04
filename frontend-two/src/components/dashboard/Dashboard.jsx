@@ -5,7 +5,8 @@ import PublishedInput from './PublishedInput';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import NewPost from '../newPost/NewPost';
 import { isTokenExpired } from '../../utils/tokenUtils';
-// import styles from './Dashboard.module.css';
+import styles from './Dashboard.module.css';
+import { LoaderCircle } from 'lucide-react';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -50,28 +51,30 @@ const Dashboard = () => {
 
   return (
     <>
-      {!loading && !postLoading ? (
-        <>
-          <Header data={userData} />
-          {name === 'new-post' ? (
-            <NewPost />
-          ) : (
-            <div>
-              <h2>Posts</h2>
-              <ul>
-                {postData.map((post) => (
-                  <li key={post.id}>
-                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
-                    <PublishedInput post={post} url={API_BASE_URL} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <Header data={userData} />
+      <div className={styles.container}>
+        {!loading && !postLoading ? (
+          <>
+            {name === 'new-post' ? (
+              <NewPost />
+            ) : (
+              <div className={styles.content}>
+                <h2>Posts</h2>
+                <ul>
+                  {postData.map((post) => (
+                    <li key={post.id}>
+                      <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                      <PublishedInput post={post} url={API_BASE_URL} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </>
+        ) : (
+          <LoaderCircle size={30} strokeWidth={2.5} className={styles.loader} />
+        )}
+      </div>
     </>
   );
 };

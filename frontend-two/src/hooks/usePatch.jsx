@@ -18,15 +18,13 @@ const usePatch = (url) => {
         body: JSON.stringify(data),
       });
 
-      console.log(response);
-
       if (!response.ok) {
         throw new Error(`HTTP error! status code:${response.status} `);
       }
 
       const result = await response.json();
       setLoding(false);
-      console.log(result.message);
+      return result.message;
     } catch (err) {
       setError(err);
     }

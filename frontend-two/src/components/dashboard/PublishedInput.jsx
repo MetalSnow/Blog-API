@@ -24,17 +24,21 @@ const PublishedInput = ({ post, url }) => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <label className={styles.switch} htmlFor={`publish-${post.id}`}>
-      <input
-        type="checkbox"
-        name={`publish-${post.id}`}
-        id={`publish-${post.id}`}
-        onChange={handleChange}
-        checked={isPublished}
-      />
-      <span className={styles.slider}></span>
-      {loading ? <Loader2Icon /> : isPublished ? 'Unpublish' : 'Publish'}
-    </label>
+    <div className={styles.status}>
+      <label className={styles.switch} htmlFor={`publish-${post.id}`}>
+        <input
+          type="checkbox"
+          name={`publish-${post.id}`}
+          id={`publish-${post.id}`}
+          onChange={handleChange}
+          checked={isPublished}
+        />
+        <span className={styles.slider}></span>
+      </label>
+      <p style={isPublished ? { color: '#65c676' } : { color: '#f07676' }}>
+        {loading ? <Loader2Icon /> : isPublished ? 'Published' : 'Unpublished'}
+      </p>
+    </div>
   );
 };
 

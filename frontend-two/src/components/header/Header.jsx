@@ -1,5 +1,12 @@
-import { BookOpen, CircleUser, LogOut } from 'lucide-react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import {
+  BookMarked,
+  BookOpen,
+  CircleUser,
+  LogOut,
+  PencilLine,
+} from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './Header.module.css';
 
 const Header = ({ data }) => {
   const navigate = useNavigate();
@@ -10,24 +17,32 @@ const Header = ({ data }) => {
   };
 
   return (
-    <header>
-      <h1>
-        <Link to="/dashboard">
-          <BookOpen size={45} />
+    <header className={styles.container}>
+      <div>
+        <h1>
+          <BookOpen size={45} strokeWidth={3} />
           My Blog
-        </Link>
-      </h1>
+        </h1>
+        <ul>
+          <li>
+            <Link to="/dashboard">
+              <BookMarked size={16} strokeWidth={2.75} /> Posts
+            </Link>
+          </li>
+          <li>
+            <Link to="/dashboard/new-post">
+              <PencilLine size={16} strokeWidth={2.75} /> Create Post
+            </Link>
+          </li>
+        </ul>
+      </div>
+
       <ul>
-        <li>
-          <Link to="/dashboard">Posts</Link>
-        </li>
-        <li>
-          <Link to="/dashboard/new-post">Create Post</Link>
-        </li>
         <li>
           <CircleUser size={28} />{' '}
           {data?.username ? data.username : 'MetalSnow'}
         </li>
+
         <li>
           <button onClick={handleLogOut}>
             Log Out <LogOut size={22} />
