@@ -50,7 +50,7 @@ const Comment = ({ comment, styles, postId, setData, fetchData }) => {
         </p>
       </div>
       <p>{comment.content}</p>
-      <button onClick={handleDeleteBtn}>
+      <button className={styles.deleteBtn} onClick={handleDeleteBtn}>
         <Trash />
       </button>
       <button className={styles.likes} ref={ref} onClick={handleLikeBtn}>

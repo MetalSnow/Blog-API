@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useFetch from '../../hooks/useFetch';
-import Modal from '../Modal';
+import Modal from '../modal/Modal';
 import { useFormStatus } from 'react-dom';
 import usePost from '../../hooks/usePost';
 import { LoaderCircle } from 'lucide-react';
@@ -46,9 +46,21 @@ const Comments = ({ url }) => {
             )}
             <form action={submitData}>
               <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter email"
+                required
+              />
               <label htmlFor="comment">Comment:</label>
-              <input type="text" id="comment" name="content" />
+              <textarea
+                type="text"
+                id="comment"
+                name="content"
+                placeholder="Write your thoughts.."
+                required
+              />
               <Submit />
             </form>
           </Modal>

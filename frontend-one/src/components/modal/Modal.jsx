@@ -1,5 +1,6 @@
 import { SquareX } from 'lucide-react';
 import { useEffect, useRef } from 'react';
+import styles from './Modal.module.css';
 
 function Modal({ openModal, closeModal, children }) {
   const ref = useRef();
@@ -13,10 +14,11 @@ function Modal({ openModal, closeModal, children }) {
   }, [openModal]);
 
   return (
-    <dialog ref={ref} onCancel={closeModal}>
+    <dialog className={styles.modal} ref={ref} onCancel={closeModal}>
       {children}
-      <button onClick={closeModal}>
-        <SquareX size={29} />
+      <button className={styles.closeBtn} onClick={closeModal}>
+        <SquareX size={24} />
+        Cancel
       </button>
     </dialog>
   );
