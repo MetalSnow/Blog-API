@@ -1,11 +1,13 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TextEditor from './TextEditor';
 import usePost from '../../hooks/usePost';
+import styles from './NewPost.module.css';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const NewPost = () => {
   const editorRef = useRef(null);
+  const inputRef = useRef(null);
   const [successMsg, setSuccessMsg] = useState(null);
   const [editorError, setEditorError] = useState(null);
   const {
@@ -55,17 +57,30 @@ const NewPost = () => {
     }
   };
 
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
-    <>
+    <div className={styles.container}>
       {error ? <p>{error.message}</p> : loading && <p>Uploading...</p>}
       {successMsg && <p>{successMsg} here.</p>}
       <form method="post" onSubmit={handleSubmit}>
-        <input type="text" name="title" id="title" placeholder="Post Title" />
+        <div className={styles.title}>
+          <input
+            ref={inputRef}
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Post Title"
+            required
+          />
+          <button type="submit">Create Post</button>
+        </div>
+
         {editorError && <div>{editorError}</div>}
         <TextEditor editorRef={editorRef} />
-        <button type="submit">Create Post</button>
       </form>
-    </>
+    </div>
   );
 };
 
