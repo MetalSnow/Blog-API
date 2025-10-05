@@ -22,12 +22,14 @@ const Article = () => {
             <h2>Articles</h2>
             <ul>
               {data.map((el) => {
-                return (
-                  <li key={el.id}>
-                    Topic:
-                    <Link to={`/articles/${el.id}`}> {el.title}</Link>
-                  </li>
-                );
+                if (el.published) {
+                  return (
+                    <li key={el.id}>
+                      Topic:
+                      <Link to={`/articles/${el.id}`}> {el.title}</Link>
+                    </li>
+                  );
+                }
               })}
             </ul>
           </>
