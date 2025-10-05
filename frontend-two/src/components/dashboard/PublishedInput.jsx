@@ -36,7 +36,13 @@ const PublishedInput = ({ post, url }) => {
         <span className={styles.slider}></span>
       </label>
       <p style={isPublished ? { color: '#65c676' } : { color: '#f07676' }}>
-        {loading ? <Loader2Icon /> : isPublished ? 'Published' : 'Unpublished'}
+        {loading ? (
+          <Loader2Icon className={styles.loader} />
+        ) : isPublished ? (
+          'Published'
+        ) : (
+          'Unpublished'
+        )}
       </p>
     </div>
   );
