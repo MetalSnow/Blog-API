@@ -7,6 +7,7 @@ import NewPost from '../newPost/NewPost';
 import { isTokenExpired } from '../../utils/tokenUtils';
 import styles from './Dashboard.module.css';
 import { LoaderCircle } from 'lucide-react';
+import DeleteButton from './DeleteButton';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -64,6 +65,11 @@ const Dashboard = () => {
                   {postData.map((post) => (
                     <li key={post.id}>
                       <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                      <DeleteButton
+                        postId={post.id}
+                        fetchPostData={fetchPostData}
+                        setPostData={setPostData}
+                      />
                       <PublishedInput post={post} url={API_BASE_URL} />
                     </li>
                   ))}

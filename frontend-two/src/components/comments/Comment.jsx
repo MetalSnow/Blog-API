@@ -25,12 +25,9 @@ const Comment = ({ comment, styles, postId, setData, fetchData }) => {
   };
 
   const handleDeleteBtn = async () => {
-    console.log(`${API_BASE_URL}/${postId}/comments/${comment.id}`);
     const token = localStorage.getItem('token');
-    console.log(token);
     try {
-      const response = await deleteComment(token);
-      console.log(response.message);
+      await deleteComment(token);
       const data = await fetchData();
       setData(data);
     } catch (err) {

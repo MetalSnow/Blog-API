@@ -41,6 +41,19 @@
         justify-content: space-between;
         width: 100%;
         padding: 6px 12px;
+
+        & a {
+          width: 50%;
+        }
+
+        & .deletePostBtn {
+          align-self: center;
+          display: flex;
+          align-items: center styles;
+          padding: 4px 8px;
+          font-size: 0.7em;
+          gap: 4px;
+        }
       }
     }
   }
